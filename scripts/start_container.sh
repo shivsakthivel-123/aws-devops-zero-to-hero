@@ -1,8 +1,12 @@
 #!/bin/bash
 set -e
 
-# Pull the Docker image from Docker Hub
-docker pull shiv20011207/simple-python-flask-app
+# Stop existing containers (ignore errors)
+sudo docker stop $(sudo docker ps -q) || true
+sudo docker rm $(sudo docker ps -aq) || true
 
-# Run the Docker image as a container
-docker run -d -p 5000:5000 shiv20011207/simple-python-flask-app
+# Pull latest image
+sudo docker pull shiv20011207/simple-python-flask-app
+
+# Run container
+sudo docker run -d -p 5000:5000 shiv20011207/simple-python-flask-app
